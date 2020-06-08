@@ -222,6 +222,8 @@ void ui_manager::draw_database_interface() {
 	ImGui::SetWindowPos(ImVec2((MAIN_WINDOW_SIZE_X / 3 * 1), 60));
 	ImGui::SetWindowSize(ImVec2(MAIN_WINDOW_SIZE_X / 3 * 2, MAIN_WINDOW_SIZE_Y - 60));
 
+
+
 	ImGui::Text("Prawa strona");
 
 	ImGui::End();
