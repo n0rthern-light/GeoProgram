@@ -13,5 +13,57 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\ui">
+      <UniqueIdentifier>{2c37fd03-4a09-4f32-a75b-9675d0d32cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui">
+      <UniqueIdentifier>{9bc01a45-e5e9-4bb0-a27d-45f214c13db2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ui\imgui">
+      <UniqueIdentifier>{343780d9-ba9a-45b9-a38e-b4a5beea2e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ui\imgui">
+      <UniqueIdentifier>{35a284f0-6c3d-4934-a514-f81a6074c506}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\imgui\imgui.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\imgui\imgui_draw.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\imgui\imgui_impl_dx9.cpp">
+      <Filter>Source Files\ui\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="ui\ui.cpp">
+      <Filter>Source Files\ui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ui\imgui\imgui.h">
+      <Filter>Header Files\ui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\imgui\imgui_impl_dx9.h">
+      <Filter>Header Files\ui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\imgui\imgui_internal.h">
+      <Filter>Header Files\ui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\ui.h">
+      <Filter>Header Files\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\imgui\stb_rect_pack.h">
+      <Filter>Header Files\ui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\imgui\stb_textedit.h">
+      <Filter>Header Files\ui\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="ui\imgui\stb_truetype.h">
+      <Filter>Header Files\ui\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
