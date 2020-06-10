@@ -1,5 +1,6 @@
 ﻿#include "ui.h";
-
+#include "../engine/engine.h"
+#include "../utils.h"
 
 LPDIRECT3DDEVICE9        g_pd3dDevice = NULL;
 D3DPRESENT_PARAMETERS    g_d3dpp;
@@ -150,13 +151,13 @@ void ui_manager::draw_main_window() {
 	ImGui::SetWindowPos(ImVec2(0, 0));
 	ImGui::SetWindowSize(ImVec2(MAIN_WINDOW_SIZE_X, MAIN_WINDOW_SIZE_Y));
 
-	if (ImGui::Button("Baza Danych", ImVec2(90, 24))) {
+	if (ImGui::Button("Operacje", ImVec2(90, 24))) {
 		this->current_sub_index = 0;
 	}
 
 	ImGui::SameLine();
 
-	if (ImGui::Button("Mapa Polski", ImVec2(90, 24))) {
+	if (ImGui::Button("Podglad Mapy", ImVec2(90, 24))) {
 		this->current_sub_index = 1;
 	}
 
@@ -178,13 +179,41 @@ void ui_manager::draw_sub_window() {
 
 	ImGui::Separator();
 	if (this->current_sub_index == 0) {
-		ImGui::Text("Baza Danych");
+		ImGui::Text("Operacje");
 		ImGui::Separator();
 		this->draw_database_interface();
 	}
 	else if (this->current_sub_index == 1) {
-		ImGui::Text("Mapa Polski");
+		ImGui::Text("Podglad Mapy");
 		ImGui::Separator();
+
+		
+
+		ImDrawList* draw_list = ImGui::GetWindowDrawList();
+		
+		auto color = ImColor(1.f, 1.f, 1.f, 1.f);
+		auto color2 = ImColor(0.f, 1.f, 0.f, .1f);
+
+		static bool isLoaded = false;
+
+		if (!isLoaded) {
+
+
+			isLoaded = true;
+		}
+
+		float rotation = 0;
+
+		auto _shp = engine::get()->get_shp(0);
+		auto _shp2 = engine::get()->get_shp(1);
+		if (_shp) {
+			_shp->drawSHP(ImVec2(15, 80), draw_list, color, 75.f, /*math::ang2rad(rotation)*/0.f);
+		}
+		if (_shp2) {
+			_shp2->drawSHP(ImVec2(15, 80), draw_list, color2, 75.f, /*math::ang2rad(rotation)*/0.f);
+		}
+		
+
 	}
 	else if (this->current_sub_index == 2) {
 		ImGui::Text("O programie");
@@ -203,28 +232,43 @@ void ui_manager::draw_about() {
 	ImGui::Text("Autor: Michal Juraszek");
 	ImGui::Text("email1: ske1337@gmail.com");
 	ImGui::Text("email2: hello.coder.michael@gmail.com");
+	ImGui::NewLine();
+	ImGui::Text("Visual Studio 2019 Community > C++ > ImGui (dx9)");
 }
 
 
 void ui_manager::draw_database_interface() {
 	ImGui::Begin("sub_window_left", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
 
-	ImGui::SetWindowPos(ImVec2(0, 60));
+	ImGui::SetWindowPos(ImVec2(0, 70));
 	ImGui::SetWindowSize(ImVec2(MAIN_WINDOW_SIZE_X / 3 * 1, MAIN_WINDOW_SIZE_Y - 60));
+
+
 
 	ImGui::Button("Losuj punkty", ImVec2(120, 24));
 	ImGui::Button("Test x < 3km", ImVec2(120, 24));
 	ImGui::Button("Wypisz punkty", ImVec2(120, 24));
+	if (ImGui::Button("Wyczysc Logi", ImVec2(120, 24))) {
+		logger::get()->clear_logs();
+	}
 
 	ImGui::End();
 
 	ImGui::Begin("sub_window_right", nullptr, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar);
 	ImGui::SetWindowPos(ImVec2((MAIN_WINDOW_SIZE_X / 3 * 1), 60));
-	ImGui::SetWindowSize(ImVec2(MAIN_WINDOW_SIZE_X / 3 * 2, MAIN_WINDOW_SIZE_Y - 60));
+	ImGui::SetWindowSize(ImVec2(MAIN_WINDOW_SIZE_X / 3 * 2 - 20, MAIN_WINDOW_SIZE_Y - 60));
+
+	ImGui::Text("Logi:");
+	ImGui::Separator();
 
 
+	std::vector<std::string>* logs = logger::get()->get_logs();
+	
+	for (auto& value : *logs) {
+		ImGui::Text(value.c_str());
+	}
 
-	ImGui::Text("Prawa strona");
+
 
 	ImGui::End();
 }
